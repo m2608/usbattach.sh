@@ -17,4 +17,4 @@ Being started without parameters it shows a list of running VMs.
 Being started with VM id as first parameter, it shows a list of attached
 devices for this specific VM.
 
-https://user-images.githubusercontent.com/20361405/168440240-0a41e248-242d-4155-9fa2-1fdafbfc2684.mp4
+https://user-images.githubusercontent.com/20361405/168440463-6e85438f-6614-4593-aca9-5d8237e24a94.mp4
