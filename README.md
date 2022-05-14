@@ -16,3 +16,5 @@ Being started without parameters it shows a list of running VMs.
 
 Being started with VM id as first parameter, it shows a list of attached
 devices for this specific VM.
+
+![](screencast/usbattach.mp4)
