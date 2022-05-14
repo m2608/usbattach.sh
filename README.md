@@ -1,7 +1,7 @@
 Script to attach (detach) usb devices to (from) virtual machines. Uses
 `qm monitor` as backend. Tested only in Proxmox environment.
 
-Requirements: `fzf`, `expect`.
+Requirements: [fzf](https://github.com/junegunn/fzf), [expect](https://core.tcl-lang.org/expect/index).
 
 Usage:
 
