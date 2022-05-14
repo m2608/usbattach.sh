@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Script to attach and detach usb devices to virtual machines. Uses
-# QEMU monitor as backend.
+# `qm monitor` as backend. Tested only in Proxmox environment.
 #
 # Requirements: fzf, expect.
 #
