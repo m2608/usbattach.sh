@@ -35,7 +35,8 @@ run_command()
     cmd=$2
 
     # We are using expect to run command and fetch it's output.
-    output=`expect <<EOD
+    # TERM unset to disable ANSI output.
+    output=`TERM= expect <<EOD
 log_user 0
 spawn qm monitor $vmid
 expect "qm> "
@@ -47,7 +48,7 @@ EOD
 `
 
     # Remove CR character, remove first line (it is the command itself).
-    echo -n "$output" \
+    echo "$output" \
         | tr -d '\r' \
         | sed '1d'
 }
@@ -297,11 +298,12 @@ while true; do
         key=`echo "$fzf_out" | sed -n '1p'`
         data=`echo "$fzf_out" | sed -n '2p'`
 
-        if test -z "$data"; then
-            # Return to "choose vm" dialog if not data returned (eg. Esc pressed).
-            vmid=""
-            break
-        elif test -z "$key"; then
+        if test -z "$key"; then
+            if test -z "$data"; then
+                # Return to "choose vm" dialog if not data returned (eg. Esc pressed).
+                vmid=""
+                break
+            fi
             # Parse data from output and attach or detach device.
             case $variant in
                 attach)
