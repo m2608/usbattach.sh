@@ -17,7 +17,6 @@
 # Being started with VM id as first parameter, it shows a list of attached
 # devices for this specific VM.
 
-
 # Runs QEMU Monitor command. 
 #
 # Params:
@@ -125,10 +124,11 @@ info_guest()
         | while read line; do
             # Parse device speed, device string and id.
             speed=`echo $line | sed -r 's/^.*, Speed ([0-9]+(\.[0-9]+)? [^ ]+),\s.*/\1/'`
-            device=`echo $line | sed -r 's/^.*Product (.*),\s+ID:.*/\1/'`
-            id=`echo $line | sed -r 's/^.*,\s+ID:\s*(.*)/\1/'`
+            device=`echo $line | sed -r 's/^.*Product (.*)(,\s+ID:.*)?/\1/'`
+            # If there is no ID, let it be empty.
+            id=`echo $line | sed -r "s/^.*,\s+ID:\s*(.*)/\1/; t; s/.*//"`
 
-            printf "%-8s %11s    %s\n" $id "$speed" "$device"
+            printf "%-8s %11s    %s\n" "$id" "$speed" "$device"
         done
 }
 
@@ -312,7 +312,8 @@ while true; do
                     attach_device $vmid $bus $port
                     ;;
                 detach)
-                    id=`echo "$data" | sed -r 's/^ID:\s*([^ ]+)\s.*/\1/'`
+                    # There could be no ID, leave the variable empty in that case.
+                    id=`echo "$data" | sed -r 's/^ID:\s*([^ ]+)\s.*/\1/; t; s/.*//'`
                     detach_device $vmid $id
                     ;;
             esac
