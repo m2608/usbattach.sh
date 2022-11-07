@@ -313,7 +313,7 @@ while true; do
                     ;;
                 detach)
                     # There could be no ID, leave the variable empty in that case.
-                    id=`echo "$data" | sed -r 's/^ID:\s*([^ ]+)\s.*/\1/; t; s/.*//'`
+                    id=`echo "$data" | sed -r 's/^.*ID:\s*(.*)/\1/; t; s/.*//'`
                     detach_device $vmid $id
                     ;;
             esac
