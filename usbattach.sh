@@ -96,8 +96,8 @@ info_host()
             bus=`echo $line | sed -r 's/^\s*Bus ([0-9]+),.*/\1/'`
             port=`echo $line | sed -r 's/^.*, Port ([0-9]+(\.[0-9]+)?),.*/\1/'`
             speed=`echo $line | sed -r 's/^.*, Speed ([0-9]+(\.[0-9]+)? [^ ]+)\s.*/\1/'`
-            vidpid=`echo $line | sed -r 's/^.*USB device ([0-9a-f]{4}):([0-9a-f]{4}),.*/\1:\2/'`
-            device=`echo $line | sed -r 's/^.*USB device ([0-9a-f]{4}):([0-9a-f]{4}),\s+(.*)/\3/'`
+            vidpid=`echo $line | sed -r 's/^.*USB device ([0-9a-f]{4}):([0-9a-f]{4}).*/\1:\2/'`
+            device=`echo $line | sed -r 's/^.*USB device ([0-9a-f]{4}):([0-9a-f]{4}),\s+(.*)/\3/; t; s/.*/???/'`
 
             printf "%3d %7s %11s %12s    %s\n" $bus $port "$speed" $vidpid "$device"
         done
